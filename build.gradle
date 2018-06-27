@@ -1,14 +1,44 @@
 group 'codehumane'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 
 repositories {
+    maven { url "https://repo.spring.io/libs-release" }
+    maven { url "https://repo.spring.io/milestone" }
     mavenCentral()
 }
 
+configurations {
+    all*.exclude module: "tomcat-jdbc"
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+    all*.exclude group: 'log4j', module: 'log4j'
+}
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.projectlombok:lombok:1.16.8'
+    compile 'org.jooq:jooq:3.8.4'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-jooq'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'com.h2database:h2:1.4.194'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
