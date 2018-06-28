@@ -1,12 +1,13 @@
 package codehumane.jooq;
 
+import codehumane.common.FeatureToggleProperties;
 import lombok.val;
 import org.jooq.DSLContext;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -39,7 +40,18 @@ public class JooqTestConfig {
     }
 
     @Bean
-    public JooqRecordToPojoMapper jooqRecordToPojoMapper() {
-        return new DefaultJooqRecordToPojoMapper();
+    public JooqRecordToPojoMapper jooqRecordToPojoMapper(
+            FeatureToggleProperties featureToggleProperties) {
+
+        return new FeatureRoutingJooqRecordToPojoMapper(
+                new CachedJooqRecordToPojoMapper(),
+                new DefaultJooqRecordToPojoMapper(),
+                featureToggleProperties
+        );
+    }
+
+    @Bean
+    public FeatureToggleProperties featureToggleProperties(Environment environment) {
+        return new FeatureToggleProperties(environment);
     }
 }
