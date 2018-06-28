@@ -1,5 +1,6 @@
 package codehumane.jooq;
 
+import codehumane.common.YNBoolean;
 import org.jooq.DSLContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;

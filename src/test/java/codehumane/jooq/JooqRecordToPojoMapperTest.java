@@ -1,5 +1,6 @@
 package codehumane.jooq;
 
+import codehumane.common.YNBoolean;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.junit.After;

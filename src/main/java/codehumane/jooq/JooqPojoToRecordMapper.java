@@ -1,5 +1,8 @@
 package codehumane.jooq;
 
+import codehumane.common.Encodable;
+import codehumane.common.Identifiable;
+import codehumane.common.ReflectionUtil;
 import org.jooq.EnumType;
 import org.jooq.Record;
 import org.springframework.util.StringUtils;

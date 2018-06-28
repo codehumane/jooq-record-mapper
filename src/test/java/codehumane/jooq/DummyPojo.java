@@ -1,5 +1,8 @@
 package codehumane.jooq;
 
+import codehumane.common.Encodable;
+import codehumane.common.Identifiable;
+import codehumane.common.YNBoolean;
 import lombok.Getter;
 import lombok.Setter;
 

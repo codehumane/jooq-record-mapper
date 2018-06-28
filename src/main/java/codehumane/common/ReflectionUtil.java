@@ -1,4 +1,4 @@
-package codehumane.jooq;
+package codehumane.common;
 
 import org.springframework.classify.util.MethodInvoker;
 import org.springframework.classify.util.MethodInvokerUtils;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * reflection 관련된 유틸리티성 코드 모음
  */
-class ReflectionUtil {
+public class ReflectionUtil {
 
     /**
      * 클래스의 모든 필드를 부모를 포함하여 모두 가져온다.
@@ -22,7 +22,7 @@ class ReflectionUtil {
      * @param clazz 클래스 타입
      * @return 모든 필드
      */
-    static List<Field> getAllFields(Class clazz) {
+    public static List<Field> getAllFields(Class clazz) {
         return getAllFields(clazz, new ArrayList<>());
     }
 
@@ -44,7 +44,7 @@ class ReflectionUtil {
      * @param methodName 메소드명
      * @param paramValue 파라미터 값
      */
-    static void invokeMethodForSingleArgument(
+    public static void invokeMethodForSingleArgument(
             Object object, String methodName, Object paramValue) {
 
         final MethodInvoker methodInvoker = MethodInvokerUtils
@@ -60,7 +60,7 @@ class ReflectionUtil {
      * @param valueType 대상에 할당하려는 값의 타입
      * @return 할당 가능 여부
      */
-    static boolean isAssignable(Class<?> target, Class<?> valueType) {
+    public static boolean isAssignable(Class<?> target, Class<?> valueType) {
         return ClassUtils.isAssignable(target, valueType);
     }
 
@@ -75,7 +75,7 @@ class ReflectionUtil {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    static <D> D constructByDefault(Class<D> destinationType)
+    public static <D> D constructByDefault(Class<D> destinationType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException {
 
@@ -92,7 +92,7 @@ class ReflectionUtil {
      * @param value  값
      * @throws IllegalAccessException
      */
-    static void setField(Object object, Field field, Object value)
+    public static void setField(Object object, Field field, Object value)
             throws IllegalAccessException {
         field.setAccessible(true);
         field.set(object, value);
@@ -106,7 +106,7 @@ class ReflectionUtil {
      * @return
      * @throws IllegalAccessException
      */
-    static Object getField(Object object, Field field)
+    public static Object getField(Object object, Field field)
             throws IllegalAccessException {
         field.setAccessible(true);
         return field.get(object);

@@ -1,5 +1,6 @@
 package codehumane.jooq;
 
+import codehumane.common.Encodable;
 import org.jooq.Record;
 
 /**

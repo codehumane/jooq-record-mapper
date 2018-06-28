@@ -1,4 +1,4 @@
-package codehumane.jooq;
+package codehumane.common;
 
 import lombok.Getter;
 
