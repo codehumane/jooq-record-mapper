@@ -10,4 +10,12 @@ JOOQ를 통해 얻은 DB 레코드 데이터를 POJO 객체로 변환해서 사�
 6. 반복적인 코드를 매번 작성해주어야 하거나,
 7. 부족하다면 확장할 수 있어야 하는데, 문서는 커녕 내부 코드를 이곳 저곳 뒤져봐도 그런 게 없거나.
 
-`JooqRecordToPojoMapper`는 이 단점들을 보완한 도구. 보다 자세한 설명은 [여기]()http://codehumane.github.io/2017/12/03/JOOQ-to-POJO-Mapping/)를 참고.
+`JooqRecordToPojoMapper`는 이 단점들을 보완한 도구.
+
+- 보다 자세한 설명은 [여기](http://codehumane.github.io/2017/12/03/JOOQ-to-POJO-Mapping/)를 참고.
+- 간단한 사용법은 [테스트 코드](https://github.com/codehumane/jooq-record-mapper/blob/master/src/test/java/codehumane/jooq/JooqRecordToPojoMapperTest.java) 참고.
+
+## 성능 개선
+
+- 기존에는 Reflection 연산을 사용한, O(N^2) 시간 복잡도의 코드. Reflection이 느린 이유는 [여기](https://docs.oracle.com/javase/tutorial/reflect/) 참고.
+- 이 O(N^2) 연산을 한 번 수행하면 그 결과를 로컬에 캐시. 이후 변환 작업부터는 캐싱된 결과를 사용. 자세한 내용은 [CachedJooqRecordToPojoMapper](https://github.com/codehumane/jooq-record-mapper/blob/master/src/main/java/codehumane/jooq/CachedJooqRecordToPojoMapper.java) 참고. 실제 DB를 연결한 환경에서 TPS가 대략 2배 정도 향상.
